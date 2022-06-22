@@ -15,7 +15,7 @@ const LoginPage: NextPage = () => {
       localStorage.setItem('accessToken', JSON.stringify(refreshToken));
       router.push('/');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
