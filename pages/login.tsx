@@ -1,18 +1,13 @@
 import type { NextPage } from 'next';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import firebaseApp from '../firebase';
+import { useAuthContext } from '../context/AuthContext';
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
+  const { login } = useAuthContext();
   const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth(firebaseApp);
     try {
-      const { user } = await signInWithPopup(auth, provider);
-      const { refreshToken, providerData } = user;
-      localStorage.setItem('user', JSON.stringify(providerData));
-      localStorage.setItem('accessToken', JSON.stringify(refreshToken));
+      await login();
       router.push('/');
     } catch (error) {
       console.error(error);
