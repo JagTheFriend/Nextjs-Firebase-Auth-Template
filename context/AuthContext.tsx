@@ -39,8 +39,8 @@ export const AuthContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  const login = (email: string, password: string) => {
-    return signInWithPopup(auth, new GoogleAuthProvider());
+  const login = async () => {
+    return await signInWithPopup(auth, new GoogleAuthProvider());
   };
 
   const logout = async () => {
